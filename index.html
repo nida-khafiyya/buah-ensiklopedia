@@ -1,0 +1,806 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ensiklopedia Data Interaksi: Database Buah</title>
+    <link href="https://fonts.googleapis.com/css2?family=Livvic:ital,wght@0,400;0,600;0,700;0,900;1,400;1,700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #743089;
+            --primary-dark: #4A1985;
+            --secondary: #4A1985;
+            --accent: #9d4edd;
+            --bg-body: #fcf8ff;
+            --card-bg: #ffffff;
+            --border-color: #d8b4fe;
+            --text-main: #2e1052;
+            --text-muted: #6b5b7b;
+            --success: #10b981;
+            --light-purple: #f3e8ff;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Livvic', sans-serif;
+            background-color: var(--bg-body);
+            color: var(--text-main);
+            line-height: 1.5;
+            padding-bottom: 40px;
+        }
+
+        .container {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* BAGIAN 1: Header & Top Banner (Gradasi Atas-Bawah & Pattern Buah 30%) */
+        .header-banner {
+            background-color: #26093f;
+            background-image: 
+                url("data:image/svg+xml,%3Csvg width='80' height='80' viewBox='0 0 80 80' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%239d4edd' fill-opacity='0.3'%3E%3Ctext x='10' y='30' font-size='22'%3E🍎%3C/text%3E%3Ctext x='50' y='30' font-size='22'%3E🍌%3C/text%3E%3Ctext x='30' y='68' font-size='22'%3E🍊%3C/text%3E%3C/g%3E%3C/svg%3E"),
+                linear-gradient(180deg, #26093f 0%, #4A1985 100%);
+            color: white;
+            padding: 35px 0 25px 0;
+            border-bottom: 4px solid var(--primary);
+            margin-bottom: 25px;
+            box-shadow: 0 4px 20px rgba(74, 25, 133, 0.3);
+        }
+
+        .student-info {
+            font-size: 1.05rem;
+            font-weight: 700;
+            color: #e9d5ff;
+            letter-spacing: 0.3px;
+            margin-bottom: 6px;
+        }
+
+        .header-title {
+            font-size: 2.1rem;
+            font-weight: 900;
+            letter-spacing: -0.5px;
+            margin-bottom: 8px;
+            color: #ffffff;
+        }
+
+        .header-subtitle {
+            font-size: 1rem;
+            font-weight: 600;
+            color: #d8b4fe;
+            margin-bottom: 20px;
+        }
+
+        .flow-container {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            background: rgba(255, 255, 255, 0.08);
+            padding: 10px 18px;
+            border-radius: 10px;
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+            font-weight: 700;
+            font-size: 0.9rem;
+        }
+
+        .flow-badge {
+            background: var(--primary);
+            color: white;
+            font-weight: 800;
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+        }
+
+        .flow-arrow {
+            color: #f0abfc;
+            font-weight: 900;
+        }
+
+        .how-it-works-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 12px;
+            margin-top: 15px;
+        }
+
+        .step-card {
+            background: rgba(255, 255, 255, 0.08);
+            border-left: 4px solid #c084fc;
+            padding: 12px 15px;
+            border-radius: 8px;
+        }
+
+        .step-num {
+            font-weight: 900;
+            color: #f0abfc;
+            font-size: 0.85rem;
+            margin-bottom: 2px;
+        }
+
+        .step-text {
+            font-size: 0.85rem;
+            color: #f3e8ff;
+            font-weight: 600;
+        }
+
+        /* Layout Grid */
+        .top-section-grid {
+            display: grid;
+            grid-template-columns: 0.95fr 1.05fr;
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        @media (max-width: 992px) {
+            .top-section-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Panel Card */
+        .panel-card {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 20px;
+            box-shadow: 0 4px 12px rgba(116, 48, 137, 0.05);
+        }
+
+        .panel-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 14px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid var(--bg-body);
+        }
+
+        .panel-title {
+            font-size: 1.15rem;
+            font-weight: 900;
+            color: var(--secondary);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .tag-ref {
+            background: var(--light-purple);
+            color: var(--primary-dark);
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.8rem;
+            padding: 4px 8px;
+            border-radius: 6px;
+            font-weight: 700;
+        }
+
+        /* BAGIAN 2: Database Buah */
+        .compact-table-wrapper {
+            overflow-x: auto;
+            max-height: 380px;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+        }
+
+        .excel-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.82rem;
+        }
+
+        .excel-table th {
+            background-color: var(--primary);
+            color: white;
+            font-weight: 900;
+            text-align: left;
+            padding: 9px 10px;
+            border: 1px solid var(--primary-dark);
+            position: sticky;
+            top: 0;
+            z-index: 10;
+        }
+
+        .excel-table td {
+            padding: 8px 10px;
+            border: 1px solid #e9d5ff;
+            color: var(--text-main);
+            font-weight: 600;
+        }
+
+        .excel-table tr:nth-child(even) {
+            background-color: #faf5ff;
+        }
+
+        .excel-table tr.active-row {
+            background-color: #f3e8ff !important;
+            font-weight: 700;
+            border-left: 3px solid var(--primary);
+        }
+
+        /* BAGIAN 3: Area Pencarian & Rumus */
+        .search-box {
+            background: var(--light-purple);
+            padding: 14px;
+            border-radius: 10px;
+            margin-bottom: 15px;
+            border: 1px solid var(--border-color);
+        }
+
+        .search-label {
+            font-size: 0.85rem;
+            font-weight: 900;
+            color: var(--secondary);
+            text-transform: uppercase;
+            margin-bottom: 6px;
+            display: block;
+        }
+
+        .select-input {
+            width: 100%;
+            padding: 10px 14px;
+            font-size: 0.95rem;
+            font-weight: 700;
+            font-family: 'Livvic', sans-serif;
+            border: 2px solid var(--primary);
+            border-radius: 8px;
+            background: white;
+            color: var(--secondary);
+            cursor: pointer;
+            outline: none;
+        }
+
+        .lookup-results-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 15px;
+            font-size: 0.88rem;
+        }
+
+        .lookup-results-table td {
+            padding: 7px 10px;
+            border-bottom: 1px solid #f3e8ff;
+        }
+
+        .lookup-results-table td:first-child {
+            font-weight: 900;
+            color: var(--text-muted);
+            width: 40%;
+        }
+
+        .lookup-results-table td:last-child {
+            font-weight: 700;
+            color: var(--primary-dark);
+        }
+
+        .formula-container {
+            background: var(--primary-dark);
+            color: #f8fafc;
+            padding: 14px;
+            border-radius: 8px;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.82rem;
+        }
+
+        .formula-title {
+            color: #e9d5ff;
+            font-weight: 900;
+            margin-bottom: 8px;
+            font-family: 'Livvic', sans-serif;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+        }
+
+        .formula-code {
+            color: #f0abfc;
+            font-weight: 600;
+            margin-bottom: 6px;
+            word-break: break-all;
+        }
+
+        .formula-code:last-child {
+            margin-bottom: 0;
+        }
+
+        /* BAGIAN 4: Kartu Infografis */
+        .infographic-section {
+            margin-bottom: 30px;
+        }
+
+        .section-heading {
+            font-size: 1.4rem;
+            font-weight: 900;
+            color: var(--secondary);
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .cards-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+        }
+
+        .info-card {
+            background: white;
+            border-radius: 16px;
+            overflow: hidden;
+            border: 2px solid var(--border-color);
+            box-shadow: 0 4px 15px rgba(116, 48, 137, 0.08);
+            transition: transform 0.2s ease;
+            position: relative;
+        }
+
+        .info-card:hover {
+            transform: translateY(-4px);
+        }
+
+        .card-badge {
+            position: absolute;
+            top: 12px;
+            right: 12px;
+            background: var(--primary-dark);
+            color: white;
+            font-size: 0.75rem;
+            font-weight: 800;
+            padding: 4px 10px;
+            border-radius: 20px;
+        }
+
+        .card-visual {
+            height: 140px;
+            background: linear-gradient(135deg, #f3e8ff 0%, #e9d5ff 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 4.2rem;
+        }
+
+        .card-body {
+            padding: 18px;
+        }
+
+        .card-item-title {
+            font-size: 1.3rem;
+            font-weight: 900;
+            color: var(--secondary);
+            margin-bottom: 2px;
+        }
+
+        .card-item-id {
+            font-size: 0.8rem;
+            color: var(--primary);
+            font-weight: 800;
+            margin-bottom: 12px;
+        }
+
+        .card-attributes {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 8px;
+            margin-bottom: 14px;
+            background: #faf5ff;
+            padding: 10px;
+            border-radius: 8px;
+            border: 1px solid #f3e8ff;
+        }
+
+        .attr-box {
+            font-size: 0.8rem;
+        }
+
+        .attr-label {
+            color: var(--text-muted);
+            font-size: 0.72rem;
+            font-weight: 800;
+            display: block;
+            text-transform: uppercase;
+        }
+
+        .attr-val {
+            font-weight: 700;
+            color: var(--text-main);
+        }
+
+        .fact-box {
+            background: #f3e8ff;
+            border-left: 4px solid var(--primary);
+            padding: 10px 12px;
+            border-radius: 6px;
+            font-size: 0.82rem;
+        }
+
+        .fact-title {
+            font-weight: 900;
+            color: var(--primary-dark);
+            margin-bottom: 2px;
+        }
+
+        .fact-desc {
+            color: #4a1985;
+            font-weight: 600;
+            line-height: 1.4;
+        }
+
+        /* BAGIAN 5: Footer */
+        .footer-banner {
+            background: var(--primary-dark);
+            color: white;
+            padding: 25px 0;
+            border-radius: 12px;
+            margin-top: 30px;
+        }
+
+        .footer-title {
+            font-size: 1rem;
+            font-weight: 900;
+            color: #e9d5ff;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+        }
+
+        .competency-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .comp-chip {
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: #f0abfc;
+            font-family: 'JetBrains Mono', monospace;
+            padding: 5px 10px;
+            border-radius: 6px;
+            font-size: 0.8rem;
+            font-weight: 700;
+        }
+
+        .live-tag {
+            background: var(--success);
+            color: white;
+            font-size: 0.75rem;
+            padding: 3px 8px;
+            border-radius: 4px;
+            font-weight: 800;
+            margin-left: 8px;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- BAGIAN 1: HEADER & TOP BANNER -->
+    <header class="header-banner">
+        <div class="container">
+            <div class="student-info">Nida Khafiyya Karim 8C</div>
+            <h1 class="header-title">ENSIKLOPEDIA DATA INTERAKSI: DATABASE BUAH</h1>
+            <p class="header-subtitle">Modul Pembelajaran Praktis Spreadsheet & Lookup Functions</p>
+            
+            <div class="flow-container">
+                <span class="flow-badge">Alur Ringkas</span>
+                <span>Pilih Parameter</span>
+                <span class="flow-arrow">➔</span>
+                <span>Lookup Data</span>
+                <span class="flow-arrow">➔</span>
+                <span>Buat Kartu Infografis</span>
+            </div>
+
+            <div class="how-it-works-grid">
+                <div class="step-card">
+                    <div class="step-num">(1) Pilih Item</div>
+                    <div class="step-text">Pilih buah pada Dropdown/Input Search.</div>
+                </div>
+                <div class="step-card">
+                    <div class="step-num">(2) Lookup Otomatis</div>
+                    <div class="step-text">Data dicari otomatis menggunakan rumus Lookup/Reference.</div>
+                </div>
+                <div class="step-card">
+                    <div class="step-num">(3) Tabel Hasil</div>
+                    <div class="step-text">Informasi muncul pada tabel hasil pencarian.</div>
+                </div>
+                <div class="step-card">
+                    <div class="step-num">(4) Kartu Infografis</div>
+                    <div class="step-text">Kartu Infografis dibuat berdasarkan data tersebut.</div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <div class="container">
+        
+        <!-- BAGIAN 2 & BAGIAN 3 GRID -->
+        <div class="top-section-grid">
+            
+            <!-- BAGIAN 2: DATABASE UTAMA -->
+            <div class="panel-card">
+                <div class="panel-header">
+                    <div class="panel-title">
+                        📊 1. DATABASE BUAH
+                    </div>
+                    <span class="tag-ref">TabelAcuan</span>
+                </div>
+
+                <div class="compact-table-wrapper">
+                    <table class="excel-table">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>NAMA BUAH</th>
+                                <th>ISI VITAMIN</th>
+                                <th>ISI MINERAL</th>
+                                <th>CIRI-CIRI</th>
+                                <th>FAKTA MENARIK</th>
+                            </tr>
+                        </thead>
+                        <tbody id="databaseTableBody">
+                            <!-- Data populated dynamically by JS -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- BAGIAN 3: AREA PENCARIAN & RINCIAN RUMUS -->
+            <div class="panel-card">
+                <div class="panel-header">
+                    <div class="panel-title">
+                        🔍 AREA PENCARIAN
+                    </div>
+                    <span class="tag-ref">Hasil Pencarian</span>
+                </div>
+
+                <div class="search-box">
+                    <label class="search-label">Pilih Item / ID:</label>
+                    <select id="fruitSelect" class="select-input" onchange="updateDashboard()">
+                        <!-- Options populated dynamically -->
+                    </select>
+                </div>
+
+                <div class="panel-title" style="font-size: 0.95rem; margin-bottom: 8px;">
+                    Tabel Hasil Pencarian
+                </div>
+                <table class="lookup-results-table">
+                    <tr>
+                        <td>Nama Buah</td>
+                        <td id="resNama">-</td>
+                    </tr>
+                    <tr>
+                        <td>Isi Vitamin</td>
+                        <td id="resVitamin">-</td>
+                    </tr>
+                    <tr>
+                        <td>Isi Mineral</td>
+                        <td id="resMineral">-</td>
+                    </tr>
+                    <tr>
+                        <td>Ciri-ciri</td>
+                        <td id="resCiri">-</td>
+                    </tr>
+                    <tr>
+                        <td>Fakta Menarik</td>
+                        <td id="resFakta">-</td>
+                    </tr>
+                </table>
+
+                <div class="formula-container">
+                    <div class="formula-title">Rumus Yang Digunakan</div>
+                    <div class="formula-code" id="codeVlookup">=VLOOKUP(I2; B4:G9; 2; FALSE)</div>
+                    <div class="formula-code" id="codeIndexMatch">=INDEX(C4:C9; MATCH(I2; B4:B9; 0))</div>
+                    <div class="formula-code">=HLOOKUP(I2; B4:G9; 3; FALSE)</div>
+                    <div class="formula-code">=CHOOSE(1; "Apel"; "Pisang"; "Salak"; "Papaya"; "Mangga"; "Jeruk")</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- BAGIAN 4: KARTU INFOGRAFIS -->
+        <section class="infographic-section">
+            <div class="section-heading">
+                <div>
+                    🎴 Kartu Infografis / Flashcard
+                    <span class="live-tag">LIVE DYNAMIC</span>
+                </div>
+            </div>
+
+            <div class="cards-grid" id="cardsGrid">
+                <!-- Cards rendered dynamically -->
+            </div>
+        </section>
+
+        <!-- BAGIAN 5: FOOTER KOMPETENSI -->
+        <footer class="footer-banner">
+            <div class="container">
+                <div class="footer-title">💡 Kompetensi Yang Dipelajari</div>
+                <div class="competency-list">
+                    <span class="comp-chip">Table Reference</span>
+                    <span class="comp-chip">VLOOKUP</span>
+                    <span class="comp-chip">HLOOKUP</span>
+                    <span class="comp-chip">MATCH</span>
+                    <span class="comp-chip">INDEX</span>
+                    <span class="comp-chip">CHOOSE</span>
+                    <span class="comp-chip">Cell Absolute ($)</span>
+                </div>
+            </div>
+        </footer>
+
+    </div>
+
+    <!-- JAVASCRIPT -->
+    <script>
+        // Database Buah dengan Fakta Menarik yang telah diperpanjang
+        const database = [
+            { 
+                id: "B01", 
+                nama: "Apel", 
+                vitamin: "Vitamin C, B, E", 
+                mineral: "Kalsium", 
+                ciri: "Merah dan bulat", 
+                fakta: "Mengandung antioksidan quercetin yang baik untuk daya ingat otak. Uniknya, pohon apel membutuhkan waktu 4 hingga 5 tahun untuk dapat menghasilkan buah pertamanya!", 
+                icon: "🍎" 
+            },
+            { 
+                id: "B02", 
+                nama: "Pisang", 
+                vitamin: "Vitamin B6", 
+                mineral: "Potassium", 
+                ciri: "Kuning dan melengkung", 
+                fakta: "Secara botanis pisang tergolong buah beri! Kandungan potasium dan karbohidratnya yang tinggi menjadikannya sumber energi instan yang sangat populer bagi para atlet.", 
+                icon: "🍌" 
+            },
+            { 
+                id: "B03", 
+                nama: "Salak", 
+                vitamin: "Vitamin C, A", 
+                mineral: "Kalium", 
+                ciri: "Kulit coklat dan oval", 
+                fakta: "Terkenal di dunia internasional sebagai 'Snake Fruit' karena tekstur kulitnya bersisik. Mengandung zat tanin tinggi yang sangat efektif mendukung kesehatan saluran pencernaan.", 
+                icon: "🟤" 
+            },
+            { 
+                id: "B04", 
+                nama: "Papaya", 
+                vitamin: "Vitamin C, A, E", 
+                mineral: "Potassium", 
+                ciri: "Buah oranye dan lonjong", 
+                fakta: "Pernah dijuluki 'Buah Malaikat' oleh penjelajah Christopher Columbus. Biji pepaya ternyata aman dikonsumsi dan memiliki sensasi rasa pedas yang unik mirip lada hitam!", 
+                icon: "🥭" 
+            },
+            { 
+                id: "B05", 
+                nama: "Mangga", 
+                vitamin: "Vitamin C, A, E", 
+                mineral: "Kalium", 
+                ciri: "Hijau/Kuning dan oval", 
+                fakta: "Dikenal dengan julukan 'Raja Buah Tropis'. Pohon mangga termasuk tanaman yang sangat tangguh dan bisa terus berbuah hingga usianya mencapai lebih dari 300 tahun!", 
+                icon: "🥭" 
+            },
+            { 
+                id: "B06", 
+                nama: "Jeruk", 
+                vitamin: "Vitamin C, A", 
+                mineral: "Kalsium", 
+                ciri: "Oranye dan bulat", 
+                fakta: "Kaya akan Vitamin C dan senyawa flavonoid penambah imunitas tubuh. Pohon jeruk pertama kali dibudidayakan di kawasan Asia Tenggara sejak ribuan tahun sebelum masehi.", 
+                icon: "🍊" 
+            }
+        ];
+
+        function initPage() {
+            renderTable();
+            populateDropdown();
+            updateDashboard();
+        }
+
+        function renderTable() {
+            const tbody = document.getElementById("databaseTableBody");
+            tbody.innerHTML = "";
+
+            database.forEach((item) => {
+                const tr = document.createElement("tr");
+                tr.id = `row-${item.id}`;
+                tr.innerHTML = `
+                    <td style="font-weight:800; color:var(--primary);">${item.id}</td>
+                    <td style="font-weight:800;">${item.nama}</td>
+                    <td>${item.vitamin}</td>
+                    <td>${item.mineral}</td>
+                    <td>${item.ciri}</td>
+                    <td>${item.fakta}</td>
+                `;
+                tbody.appendChild(tr);
+            });
+        }
+
+        function populateDropdown() {
+            const select = document.getElementById("fruitSelect");
+            select.innerHTML = "";
+            database.forEach(item => {
+                const opt = document.createElement("option");
+                opt.value = item.id;
+                opt.textContent = `${item.id} - ${item.nama}`;
+                select.appendChild(opt);
+            });
+        }
+
+        function updateDashboard() {
+            const selectedId = document.getElementById("fruitSelect").value;
+            
+            document.querySelectorAll("#databaseTableBody tr").forEach(tr => tr.classList.remove("active-row"));
+            const activeTr = document.getElementById(`row-${selectedId}`);
+            if (activeTr) activeTr.classList.add("active-row");
+
+            const data = database.find(item => item.id === selectedId);
+
+            if (data) {
+                document.getElementById("resNama").innerText = data.nama;
+                document.getElementById("resVitamin").innerText = data.vitamin;
+                document.getElementById("resMineral").innerText = data.mineral;
+                document.getElementById("resCiri").innerText = data.ciri;
+                document.getElementById("resFakta").innerText = data.fakta;
+
+                document.getElementById("codeVlookup").innerText = `=VLOOKUP("${data.id}"; B4:G9; 2; FALSE)`;
+                document.getElementById("codeIndexMatch").innerText = `=INDEX(C4:C9; MATCH("${data.id}"; B4:B9; 0))`;
+
+                renderCards(data);
+            }
+        }
+
+        function renderCards(primaryData) {
+            const grid = document.getElementById("cardsGrid");
+            grid.innerHTML = "";
+
+            const otherItems = database.filter(item => item.id !== primaryData.id);
+            const cardItems = [primaryData, ...otherItems];
+
+            cardItems.forEach((item, idx) => {
+                const isSelected = idx === 0;
+                const card = document.createElement("div");
+                card.className = "info-card";
+                if(isSelected) {
+                    card.style.border = "2px solid var(--primary)";
+                }
+
+                card.innerHTML = `
+                    <span class="card-badge">${isSelected ? '📌 Terpilih' : '💡 Flashcard'}</span>
+                    <div class="card-visual">
+                        ${item.icon}
+                    </div>
+                    <div class="card-body">
+                        <div class="card-item-title">${item.nama}</div>
+                        <div class="card-item-id">ID: ${item.id}</div>
+                        
+                        <div class="card-attributes">
+                            <div class="attr-box">
+                                <span class="attr-label">Vitamin:</span>
+                                <span class="attr-val">${item.vitamin}</span>
+                            </div>
+                            <div class="attr-box">
+                                <span class="attr-label">Mineral:</span>
+                                <span class="attr-val">${item.mineral}</span>
+                            </div>
+                            <div class="attr-box" style="grid-column: span 2;">
+                                <span class="attr-label">Ciri-Ciri:</span>
+                                <span class="attr-val">${item.ciri}</span>
+                            </div>
+                        </div>
+
+                        <div class="fact-box">
+                            <div class="fact-title">💡 Tahukah Kamu?</div>
+                            <div class="fact-desc">${item.fakta}</div>
+                        </div>
+                    </div>
+                `;
+                grid.appendChild(card);
+            });
+        }
+
+        document.addEventListener("DOMContentLoaded", initPage);
+    </script>
+</body>
+</html>
