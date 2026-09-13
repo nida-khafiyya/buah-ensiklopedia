@@ -593,8 +593,7 @@
                 <div class="formula-container">
                     <div class="formula-title">Rumus Yang Digunakan</div>
                     <div class="formula-code" id="codeVlookup">=VLOOKUP(I2; B4:G9; 2; FALSE)</div>
-                    <div class="formula-code" id="codeIndexMatch">=INDEX(C4:C9;</div> 
-                    <div class="formula-code">MATCH(I2; B4:B9; 0))</div>
+                    <div class="formula-code" id="codeIndexMatch">=INDEX(C4:C9; MATCH(I2; B4:B9; 0))</div>
                     <div class="formula-code">=HLOOKUP(I2; B4:G9; 3; FALSE)</div>
                     <div class="formula-code">=CHOOSE(1; "Apel"; "Pisang"; "Salak"; "Papaya"; "Mangga"; "Jeruk")</div>
                 </div>
